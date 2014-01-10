@@ -56,10 +56,13 @@ function draw(){
 
 var direction = 'left';
 function move(){
+ var rightEdge = getEdge(x,y,50,0);
+ var leftEdge = getEdge(x,y,50,radians(180));
+
   console.log('x = ' + x);
- if(x > 0 && direction == 'left'){
+ if(leftEdge[0] > 0 && direction == 'left'){
   x -= 5;
- }else if(x < w){
+ }else if(rightEdge[0] < w){
    direction = 'right';
    console.log('go back!');
     x += 5;
