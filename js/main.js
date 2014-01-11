@@ -29,6 +29,7 @@ function loop(){
   requestAnimFrame(loop);
 }
 
+var anim_radius = 50;
 function draw(){
   context.clearRect(0, 0, w, h);
   move();
@@ -51,6 +52,12 @@ function draw(){
   context.fillText("y: " + y, 20, 30);
   //context.fillText("edge point: " + getEdge(x,y,anim_radius,0) , 20, 40);
   
+
+  // Line
+  //context.beginPath();
+
+
+
   drawEdges(anim_angle); 
   anim_angle++;  
 
