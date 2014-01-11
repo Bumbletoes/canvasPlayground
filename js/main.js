@@ -1,5 +1,7 @@
 var canvas, context;
 var h,w,x,y;
+var anim_angle = 0;
+
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame         ||
           window.webkitRequestAnimationFrame   ||
@@ -9,13 +11,11 @@ window.requestAnimFrame = (function(){
           };
 })();
 
-
-
 (function init(){
   canvas = document.getElementById('main-canvas');
   canvas.width = w = 1024;
   canvas.height = h = 768;
-  x = w/2;
+  x = 0;
   y = h/2;
 
   context = canvas.getContext('2d');
@@ -35,7 +35,7 @@ function draw(){
 
   // Big circle
   context.beginPath();
-  context.arc(x,y,50, 2 * Math.PI, false);
+  context.arc(x,y,anim_radius, 2 * Math.PI, false);
   context.stroke();
   context.closePath();
 
@@ -49,27 +49,35 @@ function draw(){
   context.font = "bold 12px sans-serif";
   context.fillText("x: " + x, 20, 20);
   context.fillText("y: " + y, 20, 30);
-  context.fillText("edge point: " + getEdge(x,y,50,0) , 20, 40);
+  //context.fillText("edge point: " + getEdge(x,y,anim_radius,0) , 20, 40);
   
-  drawEdges();
+  drawEdges(anim_angle); 
+  anim_angle++;  
+
+  if(anim_angle == 360){
+    anim_angle = 0;
+  }
  }
 
 var direction = 'left';
 function move(){
- var rightEdge = getEdge(x,y,50,0);
- var leftEdge = getEdge(x,y,50,radians(180));
+ var rightEdge = getEdge(x,y,anim_radius,0);
+ var leftEdge = getEdge(x,y,anim_radius,radians(180));
 
-  console.log('x = ' + x);
+ 
  if(leftEdge[0] > 0 && direction == 'left'){
   x -= 5;
  }else if(rightEdge[0] < w){
    direction = 'right';
-   console.log('go back!');
+ 
     x += 5;
  }else{
    direction = 'left';
  }
 
+ 
+ //console.log(temp + canvas.height/2);
+ y = (75 * Math.sin(5 * x)) + canvas.height/2;
 }
 
 function getEdge(x2,y2,radius, t){
@@ -79,19 +87,16 @@ function getEdge(x2,y2,radius, t){
 }
 
 
-function drawEdges(){
-  var anglesToCheck = [0,90,180,270];
+function drawEdges(angle){
   var edge; 
+  edge = getEdge(x,y,anim_radius,radians(angle));
 
-  for(var i = 0; i < anglesToCheck.length; i++){
-    edge = getEdge(x,y,50,radians(anglesToCheck[i]));
+  context.beginPath();
+  context.arc(edge[0],edge[1],2, 2 * Math.PI, false);
+  context.stroke();
+  context.closePath();
 
-    context.beginPath();
-    context.arc(edge[0],edge[1],2, 2 * Math.PI, false);
-    context.stroke();
-    context.closePath();
-
-  }
+  
 }
 
 
