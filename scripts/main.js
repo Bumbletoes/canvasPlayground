@@ -1,0 +1,3 @@
+require(["drawTest"]), function(drawTest){
+
+}
