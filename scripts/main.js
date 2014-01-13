@@ -1,3 +1,7 @@
-require(["drawTest"]), function(drawTest){
+require(['util/util'], function(util){
+
+});
+
+require(['drawTest']), function(drawTest){
 
 }

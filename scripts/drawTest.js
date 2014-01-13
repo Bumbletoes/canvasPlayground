@@ -69,7 +69,7 @@ function draw(){
 var direction = 'left';
 function move(){
  var rightEdge = getEdge(x,y,anim_radius,0);
- var leftEdge = getEdge(x,y,anim_radius,radians(180));
+ var leftEdge = getEdge(x,y,anim_radius,Util.degreesToRadians(180));
 
  
  if(leftEdge[0] > 0 && direction == 'left'){
@@ -96,7 +96,7 @@ function getEdge(x2,y2,radius, t){
 
 function drawEdges(angle){
   var edge; 
-  edge = getEdge(x,y,anim_radius,radians(angle));
+  edge = getEdge(x,y,anim_radius,Util.degreesToRadians(angle));
 
   context.beginPath();
   context.arc(edge[0],edge[1],2, 2 * Math.PI, false);
@@ -105,9 +105,3 @@ function drawEdges(angle){
 
   
 }
-
-
-function radians(degrees){
-  return (degrees * Math.PI) / 180;
-}
-
