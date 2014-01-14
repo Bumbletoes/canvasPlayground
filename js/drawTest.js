@@ -18,6 +18,10 @@ window.requestAnimFrame = (function(){
   x = 0;
   y = h/2;
 
+
+  var testShape = new Shape();
+
+
   context = canvas.getContext('2d');
   context.globalCompositeOperation = 'source-over';
 
@@ -105,3 +109,4 @@ function drawEdges(angle){
 
   
 }
+
